@@ -1,32 +1,45 @@
 class_name Player
 extends Area2D
 
-@export var rows: int = 1
-@export var cols: int = 1
-
-@export var initial_pos: Vector2i = Vector2i.ZERO
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-const TILE_SIZE: float = 128
+var rows: int = 1
+var cols: int = 1
+
+var initial_grid_pos: Vector2i = Vector2i.ZERO:
+	set(value):
+		if (value.x < 0 or value.x >= cols or value.y < 0 or value.y >= rows):
+			push_error("Invalid initial position.")
+			return
+		
+		initial_grid_pos = value
+		grid_pos = value
+		position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * TILE_SIZE
+
+var TILE_SIZE: float = 128
 
 var grid_pos: Vector2i
+var input_delay: float = 0
+const MAX_INPUT_DELAY: float = 0.35
 var input_queue: Array[Vector2i] = []
 var tween_playing: bool = false
 
+
 func _ready():
-	grid_pos = initial_pos
 	position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * TILE_SIZE
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("up"):
-		try_push_to_input_queue(Vector2i.UP)
-	elif Input.is_action_just_pressed("left"):
-		try_push_to_input_queue(Vector2i.LEFT)
-	elif Input.is_action_just_pressed("down"):
-		try_push_to_input_queue(Vector2i.DOWN)
-	elif Input.is_action_just_pressed("right"):
-		try_push_to_input_queue(Vector2i.RIGHT)
+	if (input_delay <= 0):
+		if Input.is_action_pressed("up"):
+			try_push_to_input_queue(Vector2i.UP)
+		elif Input.is_action_pressed("left"):
+			try_push_to_input_queue(Vector2i.LEFT)
+		elif Input.is_action_pressed("down"):
+			try_push_to_input_queue(Vector2i.DOWN)
+		elif Input.is_action_pressed("right"):
+			try_push_to_input_queue(Vector2i.RIGHT)
+	else:
+		input_delay -= delta
 	
 	if (!input_queue.is_empty()):
 		move()
@@ -69,6 +82,7 @@ func try_push_to_input_queue(direction: Vector2i):
 	if input_queue.size() >= 1:
 		return
 	
+	input_delay = MAX_INPUT_DELAY
 	input_queue.push_back(direction)
 
 # oob = Out of Bounds
@@ -81,9 +95,9 @@ func is_next_move_oob(direction: Vector2i):
 			if grid_pos.x == 0:
 				return true
 		Vector2i.DOWN:
-			if grid_pos.y >= cols - 1:
+			if grid_pos.y >= rows - 1:
 				return true
 		Vector2i.RIGHT:
-			if grid_pos.x >= rows - 1:
+			if grid_pos.x >= cols - 1:
 				return true
 	return false

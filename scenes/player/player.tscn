@@ -3,65 +3,65 @@
 [ext_resource type="Texture2D" uid="uid://bcjjpbiqncuvp" path="res://assets/sokoban_tilesheet@2.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://qmixji6rkyji" path="res://scenes/player/player.gd" id="1_dovo2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
 atlas = ExtResource("1_8afob")
-region = Rect2(0, 512, 128, 128)
+region = Rect2(0, 640, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
 atlas = ExtResource("1_8afob")
-region = Rect2(128, 512, 128, 128)
+region = Rect2(128, 640, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
 atlas = ExtResource("1_8afob")
-region = Rect2(256, 512, 128, 128)
+region = Rect2(256, 640, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p47bc"]
 atlas = ExtResource("1_8afob")
-region = Rect2(384, 768, 128, 128)
+region = Rect2(384, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
 atlas = ExtResource("1_8afob")
-region = Rect2(512, 768, 128, 128)
+region = Rect2(512, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
 atlas = ExtResource("1_8afob")
-region = Rect2(640, 768, 128, 128)
+region = Rect2(640, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
 atlas = ExtResource("1_8afob")
-region = Rect2(0, 768, 128, 128)
+region = Rect2(0, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
 atlas = ExtResource("1_8afob")
-region = Rect2(128, 768, 128, 128)
+region = Rect2(128, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h17s1"]
 atlas = ExtResource("1_8afob")
-region = Rect2(256, 768, 128, 128)
+region = Rect2(256, 896, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_je7p5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
 atlas = ExtResource("1_8afob")
-region = Rect2(384, 512, 128, 128)
+region = Rect2(384, 640, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fm80t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmlin"]
 atlas = ExtResource("1_8afob")
-region = Rect2(512, 512, 128, 128)
+region = Rect2(512, 640, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx1jg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
 atlas = ExtResource("1_8afob")
-region = Rect2(640, 512, 128, 128)
+region = Rect2(640, 640, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8afob"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dovo2")
+"texture": SubResource("AtlasTexture_ugbui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gmlin")
+"texture": SubResource("AtlasTexture_fcs02")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lvxji")
+"texture": SubResource("AtlasTexture_myrg7")
 }],
 "loop": true,
 "name": &"walk_down",
@@ -97,13 +97,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_je7p5")
+"texture": SubResource("AtlasTexture_dovo2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fm80t")
+"texture": SubResource("AtlasTexture_gmlin")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gx1jg")
+"texture": SubResource("AtlasTexture_lvxji")
 }],
 "loop": true,
 "name": &"walk_up",
@@ -118,7 +118,7 @@ script = ExtResource("1_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8afob")
-animation = &"walk_down"
+animation = &"walk_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dovo2")

@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://l83ed4rwby3b"]
+[gd_scene load_steps=4 format=3 uid="uid://l83ed4rwby3b"]
 
 [ext_resource type="PackedScene" uid="uid://b0b3jtccilhxg" path="res://scenes/player/player.tscn" id="1_8p0mw"]
 [ext_resource type="Script" uid="uid://iw3jty4eq657" path="res://scenes/levels/proto/proto.gd" id="1_lxx42"]
+[ext_resource type="Script" uid="uid://c5kdgw8kaojwb" path="res://scenes/levels/components/grid_draw_component.gd" id="3_yrn0c"]
 
 [node name="Proto" type="Node2D"]
 script = ExtResource("1_lxx42")
 
+[node name="GridDraw" type="Node2D" parent="." node_paths=PackedStringArray("level")]
+script = ExtResource("3_yrn0c")
+level = NodePath("..")
+metadata/_custom_type_script = "uid://c5kdgw8kaojwb"
+
 [node name="Player" parent="." instance=ExtResource("1_8p0mw")]
 position = Vector2(64, 64)
-rows = 10
-cols = 6
