@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyltakpmjqpak"]
+
+[ext_resource type="PackedScene" uid="uid://c321nh75p8d8d" path="res://scenes/floors/floor.tscn" id="1_3f2x4"]
+[ext_resource type="Texture2D" uid="uid://c0jfj0sg5yhy" path="res://scenes/floors/stone_floor/ground_04.png" id="2_4e2x4"]
+
+[node name="StoneFloor" instance=ExtResource("1_3f2x4")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_4e2x4")
