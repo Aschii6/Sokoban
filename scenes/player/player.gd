@@ -14,9 +14,9 @@ var initial_grid_pos: Vector2i = Vector2i.ZERO:
 		
 		initial_grid_pos = value
 		grid_pos = value
-		position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * TILE_SIZE
+		position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * tile_size
 
-var TILE_SIZE: float = 128
+var tile_size: float = 128
 
 var grid_pos: Vector2i
 var input_delay: float = 0
@@ -26,7 +26,7 @@ var tween_playing: bool = false
 
 
 func _ready():
-	position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * TILE_SIZE
+	position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * tile_size
 
 func _process(delta: float) -> void:
 	if (input_delay <= 0):
@@ -54,7 +54,7 @@ func move() -> void:
 		return
 	
 	grid_pos += direction
-	var target_position: Vector2 = (Vector2(grid_pos) + Vector2.ONE * 1/2) * TILE_SIZE
+	var target_position: Vector2 = (Vector2(grid_pos) + Vector2.ONE * 1/2) * tile_size
 	
 	tween_playing = true
 	var tween: Tween = create_tween()
