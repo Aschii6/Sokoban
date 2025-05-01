@@ -23,6 +23,13 @@ var floor_scene: PackedScene
 
 func _ready() -> void:
 	load_data()
+	player.request_move.connect(on_player_request_move)
+
+func on_player_request_move(direction: Vector2i):
+	var player_pos: Vector2i = player.grid_pos
+	var new_pos: Vector2i = player_pos + direction
+	
+	move_player_to.emit(new_pos)
 	
 func load_data() -> void:
 	var file = FileAccess.open(config_file.resource_path, FileAccess.READ)
@@ -63,4 +70,6 @@ func init_player(data):
 	player.initial_grid_pos = Vector2i(player_pos[0], player_pos[1])
 
 func init_grid_draw():
-	pass
+	grid_draw.rows = rows
+	grid_draw.cols = cols
+	grid_draw.tile_size = tile_size
