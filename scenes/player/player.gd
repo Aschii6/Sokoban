@@ -1,9 +1,9 @@
 class_name Player
-extends Area2D
+extends Node2D
 
 signal request_move(direction: Vector2i)
 
-@onready var parent: Node2D = $".."
+@export var level: Level
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var rows: int = 1
@@ -31,7 +31,7 @@ var tween_playing: bool = false
 func _ready():
 	position = (Vector2(grid_pos) + Vector2.ONE * 1/2) * tile_size
 	
-	parent.move_player_to.connect(move)
+	level.move_player_to.connect(move)
 
 func _process(delta: float) -> void:
 	if (input_delay <= 0):
@@ -50,13 +50,13 @@ func _process(delta: float) -> void:
 		try_move()
 
 func try_move() -> void:
+	if tween_playing:
+		return
+	
 	var direction: Vector2i = input_queue.pop_front()
 	request_move.emit(direction)
 
 func move(new_pos: Vector2i) -> void:
-	if tween_playing:
-		return
-	
 	var direction: Vector2i = new_pos - grid_pos
 	
 	# Maybe move to parent class

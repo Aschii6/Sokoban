@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sokoban"
-run/main_scene="uid://l83ed4rwby3b"
+run/main_scene="uid://bb38tpwj3ha12"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
