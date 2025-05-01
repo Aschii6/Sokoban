@@ -75,6 +75,9 @@ func on_player_request_move(direction: Vector2i):
 	if (is_next_player_move_oob(grid_pos, direction)):
 		return
 	
+	if (!can_move(grid_pos, direction)):
+		return
+	
 	var new_pos: Vector2i = grid_pos + direction
 	move_player_to.emit(new_pos)
 
@@ -94,3 +97,14 @@ func is_next_player_move_oob(grid_pos: Vector2i, direction: Vector2i):
 			if grid_pos.x >= cols - 1:
 				return true
 	return false
+
+func can_move(grid_pos, direction):
+	# Collision with bricks
+	var new_pos: Vector2i = grid_pos + direction
+	for block in block_list:
+		if block is Brick:
+			if new_pos == block.grid_pos:
+				return false
+	
+	return true
+			

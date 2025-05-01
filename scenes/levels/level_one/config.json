@@ -39,5 +39,7 @@
 		{"type": "brick", "x": 9, "y": 2},
 		{"type": "brick", "x": 9, "y": 3},
 		{"type": "brick", "x": 9, "y": 4},
+		
+		{"type": "brick", "x": 7, "y": 3},
 	]
 }
