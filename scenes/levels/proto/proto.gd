@@ -1,5 +1,7 @@
 extends Node2D
 
+signal move_player_to(grid_pos: Vector2i)
+
 const BRICK = preload("res://scenes/blocks/brick/brick.tscn")
 const WOOD_CRATE = preload("res://scenes/blocks/wood_crate/wood_crate.tscn")
 
@@ -19,6 +21,13 @@ var cols: int = 1
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_level()
+	player.request_move.connect(on_player_request_move)
+
+func on_player_request_move(direction: Vector2i):
+	var player_pos: Vector2i = player.grid_pos
+	var new_pos: Vector2i = player_pos + direction
+	
+	move_player_to.emit(new_pos)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
