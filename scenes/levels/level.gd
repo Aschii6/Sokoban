@@ -24,12 +24,6 @@ var floor_scene: PackedScene
 func _ready() -> void:
 	load_data()
 	player.request_move.connect(on_player_request_move)
-
-func on_player_request_move(direction: Vector2i):
-	var player_pos: Vector2i = player.grid_pos
-	var new_pos: Vector2i = player_pos + direction
-	
-	move_player_to.emit(new_pos)
 	
 func load_data() -> void:
 	var file = FileAccess.open(config_file.resource_path, FileAccess.READ)
@@ -73,3 +67,30 @@ func init_grid_draw():
 	grid_draw.rows = rows
 	grid_draw.cols = cols
 	grid_draw.tile_size = tile_size
+
+
+func on_player_request_move(direction: Vector2i):
+	var grid_pos: Vector2i = player.grid_pos
+	
+	if (is_next_player_move_oob(grid_pos, direction)):
+		return
+	
+	var new_pos: Vector2i = grid_pos + direction
+	move_player_to.emit(new_pos)
+
+# oob = Out of Bounds
+func is_next_player_move_oob(grid_pos: Vector2i, direction: Vector2i):
+	match (direction):
+		Vector2i.UP:
+			if grid_pos.y == 0:
+				return true
+		Vector2i.LEFT:
+			if grid_pos.x == 0:
+				return true
+		Vector2i.DOWN:
+			if grid_pos.y >= rows - 1:
+				return true
+		Vector2i.RIGHT:
+			if grid_pos.x >= cols - 1:
+				return true
+	return false

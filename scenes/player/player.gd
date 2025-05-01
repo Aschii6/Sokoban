@@ -59,10 +59,6 @@ func try_move() -> void:
 func move(new_pos: Vector2i) -> void:
 	var direction: Vector2i = new_pos - grid_pos
 	
-	# Maybe move to parent class
-	if (is_next_move_oob(direction)):
-		return
-	
 	grid_pos += direction
 	var target_position: Vector2 = (Vector2(grid_pos) + Vector2.ONE * 1/2) * tile_size
 	
@@ -94,20 +90,3 @@ func try_push_to_input_queue(direction: Vector2i):
 	
 	input_delay = MAX_INPUT_DELAY
 	input_queue.push_back(direction)
-
-# oob = Out of Bounds
-func is_next_move_oob(direction: Vector2i):
-	match (direction):
-		Vector2i.UP:
-			if grid_pos.y == 0:
-				return true
-		Vector2i.LEFT:
-			if grid_pos.x == 0:
-				return true
-		Vector2i.DOWN:
-			if grid_pos.y >= rows - 1:
-				return true
-		Vector2i.RIGHT:
-			if grid_pos.x >= cols - 1:
-				return true
-	return false
