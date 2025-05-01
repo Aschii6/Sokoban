@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b0b3jtccilhxg"]
+[gd_scene load_steps=16 format=3 uid="uid://b0b3jtccilhxg"]
 
 [ext_resource type="Texture2D" uid="uid://bcjjpbiqncuvp" path="res://assets/sokoban_tilesheet@2.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://qmixji6rkyji" path="res://scenes/player/player.gd" id="1_dovo2"]
@@ -110,17 +110,10 @@ animations = [{
 "speed": 3.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
-size = Vector2(84, 100)
-
-[node name="Player" type="Area2D"]
+[node name="Player" type="Node2D"]
 z_index = 1
 script = ExtResource("1_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8afob")
 animation = &"walk_left"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dovo2")
-debug_color = Color(0, 0.6, 0.701961, 0.196078)

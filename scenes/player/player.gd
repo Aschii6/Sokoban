@@ -1,9 +1,9 @@
 class_name Player
-extends Area2D
+extends Node2D
 
 signal request_move(direction: Vector2i)
 
-@onready var parent: Node2D = $".."
+@export var level: Level
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var rows: int = 1
