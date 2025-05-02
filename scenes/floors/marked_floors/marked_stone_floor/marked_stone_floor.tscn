@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dswfybw141pcc"]
+
+[ext_resource type="PackedScene" uid="uid://cpophjxyw32y3" path="res://scenes/floors/marked_floors/marked_floor.tscn" id="1_obsq8"]
+[ext_resource type="Texture2D" uid="uid://bggq2vlbla05v" path="res://scenes/floors/marked_floors/marked_stone_floor/ground_01.png" id="2_ysbe0"]
+
+[node name="MarkedStoneFloor" instance=ExtResource("1_obsq8")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_ysbe0")

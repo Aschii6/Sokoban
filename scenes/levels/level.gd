@@ -7,6 +7,7 @@ const BRICK = preload("res://scenes/blocks/brick/brick.tscn")
 const WOOD_CRATE = preload("res://scenes/blocks/wood_crate/wood_crate.tscn")
 
 const STONE_FLOOR = preload("res://scenes/floors/stone_floor/stone_floor.tscn")
+const MARKED_STONE_FLOOR = preload("res://scenes/floors/marked_floors/marked_stone_floor/marked_stone_floor.tscn")
 
 @export var config_file: Resource
 
@@ -18,8 +19,11 @@ var rows: int = 6
 var cols: int = 10
 
 var block_list: Array[Block] = []
+var marked_floor_list: Array[MarkedFloor] = []
+var excluded_floor_list: Array[Vector2i] = [] # Not an ideal solution
 
 var floor_scene: PackedScene
+var marked_floor_scene: PackedScene
 
 func _ready() -> void:
 	load_data()
@@ -37,11 +41,22 @@ func load_data() -> void:
 	match floor_type:
 		"stone_floor":
 			floor_scene = STONE_FLOOR
+			marked_floor_scene = MARKED_STONE_FLOOR
+	
+	for m_floor in data["marked_floors"]:
+		var marked_floor: MarkedFloor = marked_floor_scene.instantiate()
+		marked_floor.position = (Vector2(m_floor["x"], m_floor["y"]) + Vector2.ONE * 0.5) * tile_size
+		marked_floor_list.push_back(marked_floor)
+		add_child(marked_floor)
+		
+		excluded_floor_list.push_back(Vector2i(m_floor["x"], m_floor["y"]))
 	
 	for i in range(rows):
 		for j in range(cols):
+			if Vector2i(j, i) in excluded_floor_list:
+				continue
 			var floor: Floor = floor_scene.instantiate()
-			floor.position = Vector2(j + 1/2, i + 1/2) * tile_size
+			floor.position = Vector2(j + 0.5, i + 0.5) * tile_size
 			add_child(floor)
 	
 	for block in data["blocks"]:
