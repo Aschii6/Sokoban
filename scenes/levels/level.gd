@@ -28,7 +28,7 @@ var marked_floor_scene: PackedScene
 func _ready() -> void:
 	load_data()
 	player.request_move.connect(on_player_request_move)
-	
+
 func load_data() -> void:
 	var file = FileAccess.open(config_file.resource_path, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
@@ -45,18 +45,19 @@ func load_data() -> void:
 	
 	for m_floor in data["marked_floors"]:
 		var marked_floor: MarkedFloor = marked_floor_scene.instantiate()
-		marked_floor.position = (Vector2(m_floor["x"], m_floor["y"]) + Vector2.ONE * 0.5) * tile_size
+		marked_floor.grid_pos = Vector2i(m_floor["x"], m_floor["y"])
+		marked_floor.position = (Vector2(marked_floor.grid_pos) + Vector2.ONE * 1/2) * tile_size
 		marked_floor_list.push_back(marked_floor)
 		add_child(marked_floor)
 		
-		excluded_floor_list.push_back(Vector2i(m_floor["x"], m_floor["y"]))
+		excluded_floor_list.push_back(marked_floor.grid_pos)
 	
 	for i in range(rows):
 		for j in range(cols):
 			if Vector2i(j, i) in excluded_floor_list:
 				continue
 			var floor: Floor = floor_scene.instantiate()
-			floor.position = Vector2(j + 0.5, i + 0.5) * tile_size
+			floor.position = (Vector2(j, i) + Vector2.ONE * 1/2) * tile_size
 			add_child(floor)
 	
 	for block in data["blocks"]:
@@ -89,6 +90,9 @@ func init_grid_draw():
 	grid_draw.cols = cols
 	grid_draw.tile_size = tile_size
 
+func _process(delta: float) -> void:
+	if (check_win()):
+		print("Win")
 
 func on_player_request_move(direction: Vector2i):
 	var grid_pos: Vector2i = player.grid_pos
@@ -153,3 +157,17 @@ func try_move_crates(grid_pos: Vector2i, direction:Vector2i):
 				return false
 	
 	return true
+
+func check_win():
+	var marked_floors_covered: int = 0
+	var marked_floors_count: int = marked_floor_list.size()
+	
+	for marked_floor: MarkedFloor in marked_floor_list:
+		for block in block_list:
+			if block is WoodCrate and block.grid_pos == marked_floor.grid_pos:
+				marked_floors_covered += 1
+	
+	if marked_floors_covered == marked_floors_count:
+		return true
+	else:
+		return false
