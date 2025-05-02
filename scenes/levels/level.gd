@@ -47,11 +47,17 @@ func load_data() -> void:
 	for block in data["blocks"]:
 		var type: String = block["type"]
 		if type == "brick":
-			var brick: Block = BRICK.instantiate()
+			var brick: Brick = BRICK.instantiate()
 			brick.grid_pos = Vector2i(block["x"], block["y"])
 			brick.position = (Vector2(brick.grid_pos) + Vector2.ONE * 1/2) * tile_size
 			block_list.push_back(brick)
 			add_child(brick)
+		elif type == "wood_crate":
+			var wood_crate: WoodCrate = WOOD_CRATE.instantiate()
+			wood_crate.grid_pos = Vector2i(block["x"], block["y"])
+			wood_crate.position = (Vector2(wood_crate.grid_pos) + Vector2.ONE * 1/2) * tile_size
+			block_list.push_back(wood_crate)
+			add_child(wood_crate)
 	
 	init_player(data)
 	init_grid_draw()
@@ -78,6 +84,9 @@ func on_player_request_move(direction: Vector2i):
 	if (!can_move(grid_pos, direction)):
 		return
 	
+	if (!try_move_crates(grid_pos, direction)):
+		return
+	
 	var new_pos: Vector2i = grid_pos + direction
 	move_player_to.emit(new_pos)
 
@@ -98,8 +107,8 @@ func is_next_player_move_oob(grid_pos: Vector2i, direction: Vector2i):
 				return true
 	return false
 
+# Check collision with bricks
 func can_move(grid_pos, direction):
-	# Collision with bricks
 	var new_pos: Vector2i = grid_pos + direction
 	for block in block_list:
 		if block is Brick:
@@ -107,4 +116,20 @@ func can_move(grid_pos, direction):
 				return false
 	
 	return true
-			
+
+# Returns true if player can move after, false otherwise
+func try_move_crates(grid_pos: Vector2i, direction:Vector2i):
+	var new_pos: Vector2i = grid_pos + direction
+	for block in block_list:
+		if new_pos == block.grid_pos:
+			if block is WoodCrate:
+				if (!try_move_crates(new_pos, direction)):
+					return false
+				else:
+					block.grid_pos = new_pos + direction
+					block.position = (Vector2(block.grid_pos) + Vector2.ONE * 1/2) * tile_size
+					return true
+			elif block is Brick:
+				return false
+	
+	return true

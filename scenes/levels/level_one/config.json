@@ -41,5 +41,8 @@
 		{"type": "brick", "x": 9, "y": 4},
 		
 		{"type": "brick", "x": 7, "y": 3},
+		
+		{"type": "wood_crate", "x": 5, "y": 3},
+		{"type": "wood_crate", "x": 4, "y": 3},
 	]
 }
