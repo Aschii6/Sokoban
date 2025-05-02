@@ -1,7 +1,6 @@
-class_name Floor
-extends Node2D
+class_name WoodCrate
+extends Block
 
-var grid_pos: Vector2i = Vector2i.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

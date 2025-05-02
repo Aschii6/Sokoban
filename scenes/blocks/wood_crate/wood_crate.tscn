@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://crgjl2fco2vnf"]
+[gd_scene load_steps=4 format=3 uid="uid://crgjl2fco2vnf"]
 
 [ext_resource type="PackedScene" uid="uid://bdiq57uchnkih" path="res://scenes/blocks/block.tscn" id="1_j3thm"]
+[ext_resource type="Script" uid="uid://b2ruji0kp888r" path="res://scenes/blocks/wood_crate/wood_crate.gd" id="2_3hjlm"]
 [ext_resource type="Texture2D" uid="uid://b7nisr8edkevl" path="res://scenes/blocks/wood_crate/wood_crate.png" id="2_pcv1c"]
 
 [node name="WoodCrate" instance=ExtResource("1_j3thm")]
+script = ExtResource("2_3hjlm")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_pcv1c")

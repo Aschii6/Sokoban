@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bggq2vlbla05v"
-path="res://.godot/imported/ground_01.png-ef109260d3ea6c51854a4149a1c0a2b5.ctex"
+path="res://.godot/imported/ground_01.png-f51c449943e8711a7ea94e02350a44ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/floors/marked_stone_floor/ground_01.png"
-dest_files=["res://.godot/imported/ground_01.png-ef109260d3ea6c51854a4149a1c0a2b5.ctex"]
+source_file="res://scenes/floors/marked_floors/marked_stone_floor/ground_01.png"
+dest_files=["res://.godot/imported/ground_01.png-f51c449943e8711a7ea94e02350a44ea.ctex"]
 
 [params]
 

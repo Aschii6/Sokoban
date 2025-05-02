@@ -39,5 +39,15 @@
 		{"type": "brick", "x": 9, "y": 2},
 		{"type": "brick", "x": 9, "y": 3},
 		{"type": "brick", "x": 9, "y": 4},
+		
+		{"type": "brick", "x": 7, "y": 3},
+		
+		{"type": "wood_crate", "x": 5, "y": 3},
+		{"type": "wood_crate", "x": 4, "y": 3},
+	],
+	
+	"marked_floors": [
+		{"x": 3, "y": 3},
+		{"x": 3, "y": 4},
 	]
 }
