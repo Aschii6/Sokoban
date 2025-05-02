@@ -93,7 +93,7 @@ func init_grid_draw():
 	grid_draw.tile_size = tile_size
 
 func _process(delta: float) -> void:
-	if (check_win()):
+	if (check_win() && !player.tween_playing):
 		get_tree().change_scene_to_packed(WIN_SCREEN)
 
 func on_player_request_move(direction: Vector2i):
