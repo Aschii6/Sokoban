@@ -127,7 +127,12 @@ func try_move_crates(grid_pos: Vector2i, direction:Vector2i):
 					return false
 				else:
 					block.grid_pos = new_pos + direction
-					block.position = (Vector2(block.grid_pos) + Vector2.ONE * 1/2) * tile_size
+					var target_position: Vector2 = (Vector2(block.grid_pos) + Vector2.ONE * 1/2) * tile_size
+					
+					var tween: Tween = create_tween()
+					# Tween durations should be less or equal than player move tween duration
+					tween.tween_property(block, "position", target_position, 0.4).set_ease(Tween.EASE_IN_OUT)
+					
 					return true
 			elif block is Brick:
 				return false
