@@ -3,6 +3,8 @@ extends Node2D
 
 signal move_player_to(grid_pos: Vector2i)
 
+const WIN_SCREEN = preload("res://scenes/win_screen/win_screen.tscn")
+
 const BRICK = preload("res://scenes/blocks/brick/brick.tscn")
 const WOOD_CRATE = preload("res://scenes/blocks/wood_crate/wood_crate.tscn")
 
@@ -92,7 +94,7 @@ func init_grid_draw():
 
 func _process(delta: float) -> void:
 	if (check_win()):
-		print("Win")
+		get_tree().change_scene_to_packed(WIN_SCREEN)
 
 func on_player_request_move(direction: Vector2i):
 	var grid_pos: Vector2i = player.grid_pos
