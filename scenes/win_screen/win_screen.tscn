@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://bif5m3vxqba7h"]
+
+[ext_resource type="FontFile" uid="uid://deb22oqiv2ahd" path="res://assets/Kenney Future.ttf" id="1_2yi6y"]
+[ext_resource type="Script" uid="uid://dk0xia8u53gbx" path="res://scenes/win_screen/win_screen.gd" id="1_misvs"]
+
+[sub_resource type="Theme" id="Theme_misvs"]
+default_font = ExtResource("1_2yi6y")
+default_font_size = 120
+
+[sub_resource type="Theme" id="Theme_1d1ta"]
+default_font = ExtResource("1_2yi6y")
+default_font_size = 60
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_misvs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.773747, 0.367239, 0.276991, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spacer1" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_misvs")
+text = "Win"
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_1d1ta")
+text = "Select Level"

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm3gbmu0q64vl"]
+
+[ext_resource type="PackedScene" uid="uid://24ix0x1vyfib" path="res://scenes/levels/level.tscn" id="1_s28a0"]
+[ext_resource type="JSON" path="res://scenes/levels/level_two/config.json" id="2_4cyj2"]
+[ext_resource type="Script" uid="uid://c5kdgw8kaojwb" path="res://scenes/levels/components/grid_draw_component.gd" id="2_k0rw6"]
+[ext_resource type="PackedScene" uid="uid://b0b3jtccilhxg" path="res://scenes/player/player.tscn" id="4_4cyj2"]
+
+[node name="LevelTwo" node_paths=PackedStringArray("player", "grid_draw") instance=ExtResource("1_s28a0")]
+config_file = ExtResource("2_4cyj2")
+player = NodePath("Player")
+grid_draw = NodePath("GridDraw")
+
+[node name="GridDraw" type="Node2D" parent="." index="0" node_paths=PackedStringArray("level")]
+z_index = 1
+script = ExtResource("2_k0rw6")
+level = NodePath("..")
+metadata/_custom_type_script = "uid://c5kdgw8kaojwb"
+
+[node name="Player" parent="." index="1" node_paths=PackedStringArray("level") instance=ExtResource("4_4cyj2")]
+level = NodePath("..")
