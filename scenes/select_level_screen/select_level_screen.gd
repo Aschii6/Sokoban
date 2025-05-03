@@ -5,13 +5,12 @@ extends Control
 
 const BUTTON_THEME = preload("res://scenes/select_level_screen/button_theme.tres")
 
-const LEVEL_ONE = preload("res://scenes/levels/level_one/level_one.tscn")
-const LEVEL_TWO = preload("res://scenes/levels/level_two/level_two.tscn")
-
 var levels: Array[PackedScene] = []
 
 func _ready() -> void:
 	# Not an ideal solution
+	const LEVEL_ONE = preload("res://scenes/levels/level_one/level_one.tscn")
+	const LEVEL_TWO = preload("res://scenes/levels/level_two/level_two.tscn")
 	levels.push_back(LEVEL_ONE)
 	levels.push_back(LEVEL_TWO)
 	

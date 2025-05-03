@@ -3,7 +3,7 @@ extends Node2D
 
 signal move_player_to(grid_pos: Vector2i)
 
-const WIN_SCREEN = preload("res://scenes/win_screen/win_screen.tscn")
+var WIN_SCREEN = load("res://scenes/win_screen/win_screen.tscn")
 
 const BRICK = preload("res://scenes/blocks/brick/brick.tscn")
 const WOOD_CRATE = preload("res://scenes/blocks/wood_crate/wood_crate.tscn")
