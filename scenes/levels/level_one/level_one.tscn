@@ -10,10 +10,9 @@ config_file = ExtResource("2_p5o7m")
 player = NodePath("Player")
 grid_draw = NodePath("GridDraw")
 
-[node name="GridDraw" type="Node2D" parent="." index="0" node_paths=PackedStringArray("level")]
+[node name="GridDraw" type="Node2D" parent="." index="0"]
 z_index = 1
 script = ExtResource("3_br5yg")
-level = NodePath("..")
 metadata/_custom_type_script = "uid://c5kdgw8kaojwb"
 
 [node name="Player" parent="." index="1" node_paths=PackedStringArray("level") instance=ExtResource("4_p5o7m")]

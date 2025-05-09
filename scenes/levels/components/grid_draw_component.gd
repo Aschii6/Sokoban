@@ -1,8 +1,6 @@
 class_name GridDraw
 extends Node2D
 
-@export var level: Level
-
 var tile_size: int = 0
 var rows: int = 0
 var cols: int = 0
