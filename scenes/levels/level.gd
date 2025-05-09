@@ -144,6 +144,9 @@ func try_move_crates(grid_pos: Vector2i, direction:Vector2i):
 	for block in block_list:
 		if new_pos == block.grid_pos:
 			if block is WoodCrate:
+				# Should also check if wood crate would be pushed OOB, could use is_next_player_move_oob, 
+				# but ideally the function would be a bit refactored to be generalised
+				
 				if (!try_move_crates(new_pos, direction)):
 					return false
 				else:
